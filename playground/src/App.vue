@@ -36,7 +36,7 @@ function initialize() {
   winBoxRef.value?.initialize()
 }
 
-function openUrl() {
+function openWithHook() {
   const randomId = Math.floor(Math.random() * 20) + 1
   const wb = create({
     ...options,
@@ -76,8 +76,8 @@ const visible = ref(false)
     <div v-show="!isOpen" class="button" @click="initialize">
       Open Vue component
     </div>
-    <div class="button" style="margin-top: 10px" @click="openUrl">
-      Open Random URL
+    <div class="button" style="margin-top: 10px" @click="openWithHook">
+      Open useWinBoxNext Hook
     </div>
 
     <div

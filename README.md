@@ -88,6 +88,7 @@ const { create, getWinBoxInst, destroy, show, hide } = VueWinBoxNext()
 function generate() {
   const winBox = { create }({
     title: 'Window title',
+    component: () => 'hi vue-win-box-next',
   })
   winBox.fullscreen()
 }
