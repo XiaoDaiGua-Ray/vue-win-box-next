@@ -10,8 +10,7 @@ import {
   toRaw,
 } from 'vue'
 import { nanoid } from 'nanoid'
-
-declare const WinBox: WinBox.WinBoxConstructor
+import WinBox from 'winbox'
 
 export const VueWinBoxNext = defineComponent({
   props: {

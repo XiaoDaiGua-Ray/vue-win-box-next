@@ -7,10 +7,9 @@ import {
   shallowRef,
 } from 'vue'
 import { nanoid } from 'nanoid'
+import WinBox from 'winbox'
 
 import type { VNode } from 'vue'
-
-declare const WinBox: WinBox.WinBoxConstructor
 
 export interface Options extends WinBox.Params {
   component: (() => VNode) | string | (() => JSX.Element)
