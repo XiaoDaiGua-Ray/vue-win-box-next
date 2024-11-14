@@ -7,13 +7,10 @@ import {
   shallowRef,
 } from 'vue'
 import { nanoid } from 'nanoid'
-import WinBox from 'winbox'
 
-import type { VNode } from 'vue'
+import type { Options } from '../types'
 
-export interface Options extends WinBox.Params {
-  component: (() => VNode) | string | (() => JSX.Element)
-}
+declare const WinBox: WinBox.WinBoxConstructor
 
 export function useWinBoxNext() {
   const winBox = shallowRef<WinBox | null>(null)
@@ -40,7 +37,7 @@ export function useWinBoxNext() {
       {
         to: `#${selector} .wb-body`,
       },
-      [createVNode(component)],
+      [createVNode(component ?? createVNode('div'), null, null)],
     )
 
     const mountElement = document.getElementById(selector)

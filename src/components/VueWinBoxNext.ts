@@ -10,12 +10,15 @@ import {
   toRaw,
 } from 'vue'
 import { nanoid } from 'nanoid'
-import WinBox from 'winbox'
+
+import type { Options } from '../types'
+
+declare const WinBox: WinBox.WinBoxConstructor
 
 export const VueWinBoxNext = defineComponent({
   props: {
     options: {
-      type: Object as PropType<WinBox.Params>,
+      type: Object as PropType<Options>,
       required: true,
     },
     openOnMount: {

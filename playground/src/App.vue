@@ -1,9 +1,10 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { VueWinBoxNext, useWinBoxNext } from 'vue-win-box-next'
+import type { Options } from 'vue-win-box-next'
 import Counter from './Counter.vue'
 
-const options = {
+const options: Options = {
   title: 'Count: 0',
   class: 'modern',
   x: 'center',
@@ -38,14 +39,12 @@ function initialize() {
 
 function openWithHook() {
   const randomId = Math.floor(Math.random() * 20) + 1
-  const wb = create({
+  create({
     ...options,
     title: `Fox #${randomId}`,
     class: 'modern',
     component: () => <Counter onUpdate:count={setTitle} />,
   })
-
-  wb.fullscreen()
 }
 const visible = ref(false)
 </script>
