@@ -16,7 +16,7 @@ export function useWinBoxNext() {
   const winBox = shallowRef<WinBox | null>(null)
   const selector = `vue-win-box-${nanoid()}`
 
-  const create = (options: Options): WinBox => {
+  const create = (options: Options) => {
     if (winBox.value) {
       console.error(
         'Please close the window first before reinitializing.',

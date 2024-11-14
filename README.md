@@ -36,6 +36,13 @@ pnpm add vue-win-box-next
   </VueWinBoxNext>
 </template>
 ```
+## Typescript
+
+```sh
+pnpm add @types/winbox -D
+```
+
+You need to install `@types/winbox` to be able to use the typescript type tooltip.
 
 ## Methods
 

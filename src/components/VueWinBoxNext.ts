@@ -18,7 +18,7 @@ declare const WinBox: WinBox.WinBoxConstructor
 export const VueWinBoxNext = defineComponent({
   props: {
     options: {
-      type: Object as PropType<Options>,
+      type: Object as PropType<Partial<Options>>,
       required: true,
     },
     openOnMount: {

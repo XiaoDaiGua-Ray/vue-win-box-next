@@ -1,6 +1,6 @@
 {
   "name": "vue-win-box-next",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "packageManager": "pnpm@9.12.3",
   "description": "",
   "author": "XiaoDaiGua-Ray <xiaodaiguaray@gmail.com>",
@@ -42,12 +42,12 @@
     "vue": ">=3.2.0"
   },
   "dependencies": {
+    "@types/winbox": "^0.2.5",
     "nanoid": "^4.0.2",
     "winbox": "^0.2.82"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.5",
-    "@types/winbox": "^0.2.5",
     "bumpp": "^9.1.1",
     "eslint": "^8.43.0",
     "tsup": "7.0.0",
