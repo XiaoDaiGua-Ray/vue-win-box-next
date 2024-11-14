@@ -1,6 +1,6 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref } from 'vue'
-import { VueWinBox, useWinBox } from 'vue-winbox'
+import { VueWinBoxNext, useWinBoxNext } from 'vue-win-box-next'
 import Counter from './Counter.vue'
 
 const options = {
@@ -11,17 +11,17 @@ const options = {
   width: '50%',
   height: '50%',
 }
-const winboxRef = ref()
+const winBoxRef = ref()
 const isOpen = ref(true)
-const createWinBox = useWinBox()
+const { create } = useWinBoxNext()
 
 function setTitle(count: number) {
-  winboxRef.value?.winbox?.setTitle(`Count: ${count}`)
+  winBoxRef.value?.winBox?.setTitle(`Count: ${count}`)
 }
 
-// TODO: Check winbox status before resizing
+// TODO: Check winBox status before resizing
 // const handleResize = () => {
-//   winboxRef.value?.winbox?.resize("50%", "50%").move("center", "center")
+//   winBoxRef.value?.winBox?.resize("50%", "50%").move("center", "center")
 // }
 
 // onMounted(() => {
@@ -33,37 +33,42 @@ function setTitle(count: number) {
 // })
 
 function initialize() {
-  winboxRef.value?.initialize()
+  winBoxRef.value?.initialize()
 }
 
 function openUrl() {
   const randomId = Math.floor(Math.random() * 20) + 1
-  createWinBox({
+  const wb = create({
+    ...options,
     title: `Fox #${randomId}`,
-    url: `https://randomfox.ca/images/${randomId}.jpg`,
     class: 'modern',
+    component: () => <Counter onUpdate:count={setTitle} />,
   })
+
+  wb.fullscreen()
 }
 const visible = ref(false)
 </script>
 
 <template>
-  <VueWinBox
-    ref="winboxRef"
+  <VueWinBoxNext
+    ref="winBoxRef"
     :options="options"
     @focus="isOpen = true"
     @close="isOpen = false"
   >
     <Counter @update:count="setTitle" />
-  </VueWinBox>
+  </VueWinBoxNext>
 
   <div v-if="visible">
-    <VueWinBox
+    <VueWinBoxNext
       :options="{
         title: `Fox #1`,
         url: `https://randomfox.ca/images/1.jpg`,
         class: 'modern',
-      }" open-on-mount @close="visible = false"
+      }"
+      open-on-mount
+      @close="visible = false"
     />
   </div>
 
@@ -71,14 +76,24 @@ const visible = ref(false)
     <div v-show="!isOpen" class="button" @click="initialize">
       Open Vue component
     </div>
-    <div class="button" style="margin-top: 10px;" @click="openUrl">
+    <div class="button" style="margin-top: 10px" @click="openUrl">
       Open Random URL
     </div>
 
-    <div v-show="!visible" class="button" style="margin-top: 10px;" @click="() => visible = true">
+    <div
+      v-show="!visible"
+      class="button"
+      style="margin-top: 10px"
+      @click="() => (visible = true)"
+    >
       Parent Dom Visible
     </div>
-    <div v-show="visible" class="button" style="margin-top: 10px;" @click="() => visible = false">
+    <div
+      v-show="visible"
+      class="button"
+      style="margin-top: 10px"
+      @click="() => (visible = false)"
+    >
       Parent Dom Hidden
     </div>
   </div>
@@ -90,9 +105,11 @@ const visible = ref(false)
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, "Open Sans", OpenSans, Roboto, Segoe UI, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, 'Open Sans',
+    OpenSans, Roboto, Segoe UI, sans-serif;
   background: linear-gradient(135deg, #0d1117, #131820);
 }
 

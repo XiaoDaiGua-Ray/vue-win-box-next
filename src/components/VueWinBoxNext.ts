@@ -1,10 +1,19 @@
 import type { Component, PropType } from 'vue'
-import { Teleport, defineComponent, h, onMounted, onScopeDispose, ref, toRaw } from 'vue'
+import {
+  Teleport,
+  defineComponent,
+  h,
+  onMounted,
+  onScopeDispose,
+  ref,
+  shallowRef,
+  toRaw,
+} from 'vue'
 import { nanoid } from 'nanoid'
 
 declare const WinBox: WinBox.WinBoxConstructor
 
-export const VueWinBox = defineComponent({
+export const VueWinBoxNext = defineComponent({
   props: {
     options: {
       type: Object as PropType<WinBox.Params>,
@@ -15,21 +24,15 @@ export const VueWinBox = defineComponent({
       default: true,
     },
   },
-  emits: [
-    'move',
-    'resize',
-    'close',
-    'focus',
-    'blur',
-  ],
+  emits: ['move', 'resize', 'close', 'focus', 'blur'],
   setup(props, { slots, emit, expose }) {
-    const selector = `vuewinbox-${nanoid()}`
-    const winbox = ref<WinBox | null>(null)
+    const selector = `vue-win-box-${nanoid()}`
+    const winBox = shallowRef<WinBox | null>(null)
     const initialized = ref(false)
 
     expose({
       selector,
-      winbox,
+      winBox,
       initialized,
       initialize,
     })
@@ -40,29 +43,29 @@ export const VueWinBox = defineComponent({
         return
       }
 
-      winbox.value = new WinBox({
+      winBox.value = new WinBox({
         onresize: (width: number, height: number) => {
           emit('resize', {
-            id: winbox.value?.id,
+            id: winBox.value?.id,
             width,
             height,
           })
         },
         onclose: () => {
-          emit('close', { id: winbox.value?.id })
+          emit('close', { id: winBox.value?.id })
           initialized.value = false
-          winbox.value = null
+          winBox.value = null
           return false
         },
         onfocus: () => {
-          emit('focus', { id: winbox.value?.id })
+          emit('focus', { id: winBox.value?.id })
         },
         onblur: () => {
-          emit('blur', { id: winbox.value?.id })
+          emit('blur', { id: winBox.value?.id })
         },
         onmove: (x: number, y: number) => {
           emit('move', {
-            id: winbox.value?.id,
+            id: winBox.value?.id,
             x,
             y,
           })
@@ -76,17 +79,23 @@ export const VueWinBox = defineComponent({
     onMounted(() => {
       if (!props.openOnMount)
         return
+
       initialize()
     })
 
     onScopeDispose(() => {
-      toRaw(winbox.value)?.close()
+      toRaw(winBox.value)?.close()
     })
 
-    return () => initialized.value
-      ? h(Teleport as unknown as Component, {
-        to: `#${selector} .wb-body`,
-      }, slots.default?.())
-      : null
+    return () =>
+      initialized.value
+        ? h(
+          Teleport as unknown as Component,
+          {
+            to: `#${selector} .wb-body`,
+          },
+          slots.default?.(),
+        )
+        : null
   },
 })

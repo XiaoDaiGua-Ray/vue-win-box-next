@@ -1,63 +1,61 @@
-# vue-winbox
+# vue-win-box-next
 
-Vue 3 wrapper for [WinBox.js](https://github.com/nextapps-de/winbox).
-
-Demo: https://vue-winbox.vercel.app
+Vue 3 wrapper for [WinBox.js](https://github.com/nextapps-de/winBox).
 
 ## Install
 
 ```bash
-pnpm add vue-winbox
+pnpm add vue-win-box-next
 ```
 
 ## Usage
 
 ```html
 <script setup>
-import { ref } from 'vue'
-import { VueWinBox } from 'vue-winbox'
+  import { ref } from 'vue'
+  import { VueWinBoxNext } from 'vue-win-box-next'
 
-const count = ref(0)
-const wbRef = ref()
+  const count = ref(0)
+  const wbRef = ref()
 
-//WinBox options
-const options = {
-  title: 'Current count: 0',
-  class: 'modern',
-}
+  //WinBox options
+  const options = {
+    title: 'Current count: 0',
+    class: 'modern',
+  }
 
-setInterval(() => {
-  count.value++
-  wbRef.value?.winbox?.setTitle(`Current count: ${count.value}`)
-}, 500)
+  setInterval(() => {
+    count.value++
+    wbRef.value?.winBox?.setTitle(`Current count: ${count.value}`)
+  }, 500)
 </script>
 
 <template>
-  <VueWinBox ref="wbRef" :options="options" @onmove="onMove">
+  <VueWinBoxNext ref="wbRef" :options="options" @onmove="onMove">
     <div>Window 1: {{ count }}</div>
-  </VueWinBox>
+  </VueWinBoxNext>
 </template>
 ```
 
 ## Methods
 
-To update props and access methods/controls, just add a `ref` to the `VueWinBox` component and use it like how you would with `WinBox.js`:
+To update props and access methods/controls, just add a `ref` to the `VueWinBoxNext` component and use it like how you would with `WinBox.js`:
 
 ```ts
 // Set the window title
-wbRef.value.winbox.setTitle('New title')
+wbRef.value.winBox.setTitle('New title')
 
 // Custom Position / Size
-wbRef.value.winbox.resize('50%', '50%').move('center', 'center')
+wbRef.value.winBox.resize('50%', '50%').move('center', 'center')
 
 // Add class
-wbRef.value.winbox.addClass('modern')
+wbRef.value.winBox.addClass('modern')
 
 // Focus a window (bring up to front)
-wbRef.value.winbox.focus()
+wbRef.value.winBox.focus()
 
 // Chaining Methods
-wbRef.value.winbox
+wbRef.value.winBox
   .setTitle('Title')
   .resize('50%', '50%')
   .move('center', 'center')
@@ -67,34 +65,38 @@ wbRef.value.winbox
 To reinitialize a closed window:
 
 ```javascript
-wbRef.value.winbox.initialize()
+wbRef.value.winBox.initialize()
 ```
 
 ## Events
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`resize` | Function | - | Fired when the window resizes. |
-`close` | Function | - | Fired when the window is closing. |
-`focus` | Function | - | Fired when the window is in focus. |
-`blur` | Function | - | - |
-`move` | Function | - | Fired when the window moves. |
-
+| Name     | Type     | Default | Description                        |
+| -------- | -------- | ------- | ---------------------------------- |
+| `resize` | Function | -       | Fired when the window resizes.     |
+| `close`  | Function | -       | Fired when the window is closing.  |
+| `focus`  | Function | -       | Fired when the window is in focus. |
+| `blur`   | Function | -       | -                                  |
+| `move`   | Function | -       | Fired when the window moves.       |
 
 ## Vanilla WinBox.js
 
 ```ts
-import { useWinBox } from 'vue-winbox'
+import { VueWinBoxNext } from 'vue-win-box-next'
 
-const createWindow = useWinBox()
+const { create, getWinBoxInst, destroy, show, hide } = VueWinBoxNext()
 
 function generate() {
-  const winbox = createWindow({
+  const winBox = { create }({
     title: 'Window title',
   })
-  winbox.fullscreen()
+  winBox.fullscreen()
 }
 ```
 
 ## License
+
 MIT
+
+## Thanks
+
+This project fork from [wobsoriano](https://github.com/wobsoriano/vue-winbox). Thanks wobsoriano!

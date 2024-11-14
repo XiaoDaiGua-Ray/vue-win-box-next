@@ -1,17 +1,21 @@
 {
-  "name": "vue-winbox",
-  "version": "0.2.3",
-  "packageManager": "pnpm@8.6.3",
+  "name": "vue-win-box-next",
+  "version": "1.0.0",
+  "packageManager": "pnpm@9.12.3",
   "description": "",
-  "author": "Robert Soriano <sorianorobertc@gmail.com>",
+  "author": "XiaoDaiGua-Ray <xiaodaiguaray@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/wobsoriano/vue-winbox#readme",
+  "homepage": "https://github.com/XiaoDaiGua-Ray/vue-win-box-next#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wobsoriano/vue-winbox.git"
+    "url": "git+https://github.com/XiaoDaiGua-Ray/vue-win-box-next.git"
   },
-  "bugs": "https://github.com/wobsoriano/vue-winbox/issues",
-  "keywords": [],
+  "bugs": "https://github.com/XiaoDaiGua-Ray/vue-win-box-next/issues",
+  "keywords": [
+    "vue-win-box",
+    "vue3",
+    "winbox"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -39,16 +43,16 @@
   },
   "dependencies": {
     "nanoid": "^4.0.2",
-    "winbox": "^0.2.6"
+    "winbox": "^0.2.82"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.5",
-    "@types/winbox": "^0.2.1",
+    "@types/winbox": "^0.2.5",
     "bumpp": "^9.1.1",
     "eslint": "^8.43.0",
     "tsup": "7.0.0",
     "typescript": "^5.1.3",
-    "vue": "^3.3.4"
+    "vue": "^3.5.12"
   },
   "eslintConfig": {
     "extends": "@antfu"

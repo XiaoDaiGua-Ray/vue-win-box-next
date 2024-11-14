@@ -1,10 +1,6 @@
 import 'winbox'
 
-import { VueWinBox } from './components/VueWinBox'
-import { useWinBox } from './composables/useWinBox'
+import { VueWinBoxNext } from './components/VueWinBoxNext'
+import { useWinBoxNext } from './composables/useWinBoxNext'
 
-export {
-  useWinBox,
-  VueWinBox,
-  VueWinBox as default,
-}
+export { useWinBoxNext, VueWinBoxNext, VueWinBoxNext as default }
